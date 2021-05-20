@@ -1,10 +1,10 @@
 const reducer = (posts = [], action) => {
     switch (action.type) {
         case 'FETCH_ALL':
-            return posts;
+            return action.payload;
             break;
             case 'CREATE':
-                return posts;
+                return [...posts, action.payload]
                 break;
     
         default:
