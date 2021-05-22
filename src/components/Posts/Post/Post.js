@@ -8,21 +8,19 @@ import { Button, Card, CardActions, CardContent, CardMedia, Typography } from '@
 import moment from 'moment';
 import { deletePost, likePost } from '../../../actions/posts.js';
 
-const Post = ({post}) => {
-	const classes = useStyles()
+const Post = ({ post, setCurrentId }) => {
+    const classes = useStyles()
     const dispatch = useDispatch()
     const posts = useSelector(state => state.posts)
-    console.log("posts");
-    console.log(posts);
-    return(
+    return (
         <Card className={classes.card}>
             <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
             <div className={classes.overlay}>
-            <Typography variant="h6">{post.creator}</Typography>
+                <Typography variant="h6">{post.creator}</Typography>
                 <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
             </div>
             <div className={classes.overlay2}>
-                <Button style={{color: 'white'}} size="small" onClick={() => {}}>
+                <Button style={{ color: 'white' }} size="small" onClick={() => setCurrentId(post._id)}>
                     <MoreHorizIcon fontSize="default" />
                 </Button>
             </div>
@@ -34,7 +32,7 @@ const Post = ({post}) => {
                 <Typography variant="body2" color="textSecondary" component="p">{post.message}</Typography>
             </CardContent>
             <CardActions>
-            <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}>
+                <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}>
                     <ThumbUpAltIcon fontSize="small" />
                     &nbsp; Like &nbsp;
                     {post.likeCount}
